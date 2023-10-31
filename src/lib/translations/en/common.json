@@ -1,0 +1,17 @@
+{
+  "pageTitle": {
+    "debug": "Debug",
+    "aboutUs": "About Us",
+    "contact": "Contact",
+    "legalNotice": "Legal Notice",
+    "cookiePolicy": "Cookie Policy"
+  },
+  "error": "Error",
+  "internalError": {
+    "title": "Internal Error",
+    "description": "Something went wrong, please try again later..."
+  },
+  "footer": {
+    "bottomNote": "© {{s1}} - {{s2}} is developed and maintained by"
+  }
+}

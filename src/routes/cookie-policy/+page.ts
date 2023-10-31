@@ -3,7 +3,7 @@ import type { PageLoad } from './$types';
 export const load: PageLoad = () => {
   return {
     meta: {
-      title: 'common.pageTitle.legalNotice',
+      title: 'common.pageTitle.cookiePolicy',
     },
     layout: {
       showTitle: true,

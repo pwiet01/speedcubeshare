@@ -9,6 +9,6 @@
 
 <style>
   p {
-    color: lightgreen;
+    color: green;
   }
 </style>

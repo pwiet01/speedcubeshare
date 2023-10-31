@@ -34,6 +34,7 @@
   },
   "type": "module",
   "dependencies": {
-    "@fontsource/lato": "^5.0.17"
+    "@fontsource/lato": "^5.0.17",
+    "sveltekit-i18n": "^2.4.2"
   }
 }
