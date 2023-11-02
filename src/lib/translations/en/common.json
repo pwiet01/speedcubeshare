@@ -4,7 +4,8 @@
     "aboutUs": "About Us",
     "contact": "Contact",
     "legalNotice": "Legal Notice",
-    "cookiePolicy": "Cookie Policy"
+    "cookiePolicy": "Cookie Policy",
+    "settings": "Settings"
   },
   "error": "Error",
   "internalError": {
@@ -13,5 +14,6 @@
   },
   "footer": {
     "bottomNote": "© {{s1}} - {{s2}} is developed and maintained by"
-  }
+  },
+  "overview": "Overview"
 }

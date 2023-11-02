@@ -24,6 +24,7 @@
 
   const maxWidthMapping: { [key: string]: string } = {
     small: 'max-w-[50rem]',
+    max: 'max-w-[110rem]',
   };
 
   onMount(() => {
@@ -55,9 +56,7 @@
 <Header debug={data.debug} />
 
 <main
-  class="flex-1 pt-6 pb-10 {$page.data?.layout?.maxWidth
-    ? `${maxWidthMapping[$page.data.layout.maxWidth]} mx-auto w-full`
-    : ''}"
+  class="flex-1 pt-6 pb-10 {maxWidthMapping[$page.data?.layout?.maxWidth ?? 'max']} mx-auto w-full"
 >
   {#if !$page.error && $page.data?.layout?.showTitle}
     <h1 class="mb-6 text-4xl font-bold">{pageTitle}</h1>
