@@ -15,5 +15,12 @@
   "footer": {
     "bottomNote": "© {{s1}} - {{s2}} is developed and maintained by"
   },
-  "overview": "Overview"
+  "overview": "Overview",
+  "auth": {
+    "email": "Email",
+    "password": "Password",
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "signUp": "Sign Up"
+  }
 }

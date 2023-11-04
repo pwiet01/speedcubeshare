@@ -11,7 +11,7 @@
     </form>
     <h1 class="text-2xl">{title}</h1>
 
-    <slot name="body">
+    <slot>
       <p class="py-4">{text}</p>
     </slot>
 
