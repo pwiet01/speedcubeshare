@@ -5,7 +5,7 @@ import type {
   FormValidationResult,
   FormValidationErrors,
   FormParseFieldOptions,
-} from '$lib/server/ts/formUtils/types';
+} from '$lib/ts/formUtils/types';
 import { validateLength, validateType } from '$lib/server/ts/formUtils/validate';
 
 const defaultOptions: FormParseFieldOptions = {
@@ -13,7 +13,6 @@ const defaultOptions: FormParseFieldOptions = {
   expectedType: 'string',
   minLength: 0,
   maxLength: 255,
-  hideValue: false,
 };
 
 export function parseFormData(formData: FormData, options: FormParseOptions): FormParseResult {
@@ -41,9 +40,7 @@ export function parseFormData(formData: FormData, options: FormParseOptions): Fo
       continue;
     }
 
-    if (!mergedOptions.hideValue) {
-      data[key] = value;
-    }
+    data[key] = value;
 
     const lengthValidationResult = validateLength(
       key,
@@ -70,6 +67,17 @@ export function parseFormData(formData: FormData, options: FormParseOptions): Fo
     validationResult,
     data,
   };
+}
+
+export function filterFormParseData(data: FormParseData, hideKeys: Set<string>): FormParseData {
+  const filteredData: FormParseData = {};
+  for (const [key, value] of Object.entries(data)) {
+    if (!hideKeys.has(key)) {
+      filteredData[key] = value;
+    }
+  }
+
+  return filteredData;
 }
 
 function mergeValidationResults(

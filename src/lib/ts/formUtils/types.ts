@@ -1,6 +1,6 @@
 export interface FormValidationErrors {
-  [key: string]: {
-    messageKey: string;
+  [field: string]: {
+    key: string;
     translationParams?: {
       [param: string]: string;
     };
@@ -22,7 +22,6 @@ export interface FormParseFieldOptions {
   expectedType: 'string' | 'file';
   minLength: number;
   maxLength: number;
-  hideValue: boolean;
 }
 
 export interface FormParseOptions {

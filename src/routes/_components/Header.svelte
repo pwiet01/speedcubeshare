@@ -4,6 +4,8 @@
   import ProfileNavigation from './ProfileNavigation.svelte';
   import MainNavigationItems from './MainNavigationItems.svelte';
   import { t } from '$lib/translations';
+  import { user } from '$lib/ts/stores';
+  import LogoutButton from './LogoutButton.svelte';
 
   export let debug = false;
 
@@ -34,24 +36,34 @@
           </a>
         </div>
         <div class="hidden md:flex items-center">
-          <ul class="menu menu-horizontal">
+          <ul class="menu menu-horizontal mr-2">
             <MainNavigationItems {debug} />
           </ul>
 
           <div class="dropdown dropdown-end">
             <input type="hidden" id="profile-dropdown-input" />
             <label tabindex="-1" class="cursor-pointer" for="profile-dropdown-input">
-              <img
-                src="https://yt3.googleusercontent.com/ytc/APkrFKZ9USK2IB7p9lhmvJPbDBxbJKLVCwRoBVOSF19JGw=s176-c-k-c0x00ffffff-no-rj"
-                alt="User"
-                class="rounded-full w-10 h-10"
-              />
+              {#if $user}
+                <img
+                  src="https://yt3.googleusercontent.com/ytc/APkrFKZ9USK2IB7p9lhmvJPbDBxbJKLVCwRoBVOSF19JGw=s176-c-k-c0x00ffffff-no-rj"
+                  alt="User"
+                  class="rounded-full w-10 h-10"
+                />
+              {:else}
+                <span class="!w-10 fa-stack fa-lg">
+                  <i class="fa-solid fa-circle fa-stack-2x text-base-300" />
+                  <i class="fa-solid fa-user fa-stack-1x" />
+                </span>
+              {/if}
             </label>
             <div
               class="menu dropdown-content z-40 px-2 py-4 border shadow-lg bg-base-100 rounded-box w-52 mt-4"
             >
               <ProfileNavigation />
-              <a href="/" class="btn btn-sm btn-error w-full">{$t('common.auth.signOut')}</a>
+
+              {#if $user}
+                <LogoutButton formClass="w-full" buttonClass="w-full btn-sm" />
+              {/if}
             </div>
           </div>
         </div>
@@ -63,15 +75,22 @@
     <label for="menu-drawer" aria-label="close sidebar" class="drawer-overlay" />
     <div class="flex flex-col justify-between p-4 w-80 min-h-full bg-base-200 opacity-100">
       <div>
-        <ProfileNavigation {closeDrawer} />
-        <div class="divider" />
+        {#if $user}
+          <ProfileNavigation {closeDrawer} />
+          <div class="divider px-3" />
+        {/if}
         <ul class="menu px-0">
           <MainNavigationItems {debug} {closeDrawer} />
         </ul>
       </div>
-      <a on:click={closeDrawer} href="/" class="btn btn-error w-full self-end"
-        >{$t('common.auth.signOut')}</a
-      >
+
+      {#if $user}
+        <LogoutButton formClass="w-full self-end" buttonClass="w-full" />
+      {:else}
+        <a on:click={closeDrawer} href="/login" class="btn btn-primary w-full self-end">
+          {$t('common.auth.signIn')}
+        </a>
+      {/if}
     </div>
   </div>
 </div>

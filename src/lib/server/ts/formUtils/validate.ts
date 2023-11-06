@@ -1,4 +1,4 @@
-import type { FormValidationResult } from '$lib/server/ts/formUtils/types';
+import type { FormValidationResult } from '$lib/ts/formUtils/types';
 
 export function validateType(
   key: string,
@@ -53,14 +53,14 @@ function success(): FormValidationResult {
 
 function fail(
   key: string,
-  messageKey: string,
+  errorKey: string,
   translationParams?: { [param: string]: string }
 ): FormValidationResult {
   return {
     success: false,
     errors: {
       [key]: {
-        messageKey,
+        key: errorKey,
         translationParams,
       },
     },

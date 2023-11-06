@@ -8,6 +8,8 @@
     "maxLength": "Must not have more than {{s1}} characters.",
     "email": "Not a valid email address.",
     "required": "This value is required.",
-    "invalidType": "Must be of type {{s1}}."
+    "invalidType": "Must be of type {{s1}}.",
+    "userAlreadyExists": "A user with this email already exists. Try logging in.",
+    "incorrectEmailOrPassword": "Incorrect email or password."
   }
 }

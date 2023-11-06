@@ -16,7 +16,9 @@
     "password": "Password",
     "signIn": "Sign In",
     "signOut": "Sign Out",
-    "signUp": "Sign Up"
+    "signUp": "Sign Up",
+    "createNew": "Create a new account",
+    "loginWithExisting": "Login with an existing account"
   },
   "user": {
     "displayName": "Display Name",
