@@ -3,6 +3,7 @@
   import { globalConfig } from '$lib/config/globalConfig';
   import ProfileNavigation from './ProfileNavigation.svelte';
   import MainNavigationItems from './MainNavigationItems.svelte';
+  import { t } from '$lib/translations';
 
   export let debug = false;
 
@@ -50,7 +51,7 @@
               class="menu dropdown-content z-40 px-2 py-4 border shadow-lg bg-base-100 rounded-box w-52 mt-4"
             >
               <ProfileNavigation />
-              <a href="/" class="btn btn-sm btn-error w-full">Logout</a>
+              <a href="/" class="btn btn-sm btn-error w-full">{$t('common.auth.signOut')}</a>
             </div>
           </div>
         </div>
@@ -68,7 +69,9 @@
           <MainNavigationItems {debug} {closeDrawer} />
         </ul>
       </div>
-      <a on:click={closeDrawer} href="/" class="btn btn-error w-full self-end">Logout</a>
+      <a on:click={closeDrawer} href="/" class="btn btn-error w-full self-end"
+        >{$t('common.auth.signOut')}</a
+      >
     </div>
   </div>
 </div>

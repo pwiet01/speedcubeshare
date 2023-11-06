@@ -1,0 +1,13 @@
+{
+  "error": "Error",
+  "internal": "Internal Error",
+  "internalHint": "Something went wrong, please try again later...",
+  "notFound": "Not Found",
+  "formValidation": {
+    "minLength": "Must at least have {{s1}} characters.",
+    "maxLength": "Must not have more than {{s1}} characters.",
+    "email": "Not a valid email address.",
+    "required": "This value is required.",
+    "invalidType": "Must be of type {{s1}}."
+  }
+}

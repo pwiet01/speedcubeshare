@@ -1,9 +1,9 @@
 import { error } from '@sveltejs/kit';
-import { serverConfig } from '$lib/server/config/serverConfig';
 import type { PageServerLoad } from './$types';
+import { dev } from '$app/environment';
 
 export const load: PageServerLoad = () => {
-  if (!serverConfig.isDevEnv) {
-    throw error(404, 'Not Found');
+  if (dev) {
+    throw error(404, 'error.notFound');
   }
 };

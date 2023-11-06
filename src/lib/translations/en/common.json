@@ -7,11 +7,6 @@
     "cookiePolicy": "Cookie Policy",
     "settings": "Settings"
   },
-  "error": "Error",
-  "internalError": {
-    "title": "Internal Error",
-    "description": "Something went wrong, please try again later..."
-  },
   "footer": {
     "bottomNote": "© {{s1}} - {{s2}} is developed and maintained by"
   },
@@ -22,5 +17,9 @@
     "signIn": "Sign In",
     "signOut": "Sign Out",
     "signUp": "Sign Up"
+  },
+  "user": {
+    "displayName": "Display Name",
+    "username": "Username"
   }
 }

@@ -9,8 +9,7 @@
   import { globalConfig } from '$lib/config/globalConfig';
   import { t } from '$lib/translations';
   import type { Page } from '@sveltejs/kit';
-
-  export let data;
+  import { dev } from '$app/environment';
 
   $: pageTitle = getPageTitle($page);
 
@@ -37,7 +36,7 @@
 
   function getPageTitle(page: Page) {
     if (page.error) {
-      return `(${page.status}) ${page.error.message ?? $t('common.error')}`;
+      return `(${page.status}) ${$t(page.error.message ?? 'error.error')}`;
     }
 
     if (!page.data?.meta?.title) {
@@ -53,10 +52,12 @@
   }
 </script>
 
-<Header debug={data.debug} />
+<Header debug={dev} />
 
 <main
-  class="flex flex-col flex-1 pt-6 pb-10 {maxWidthMapping[$page.data?.layout?.maxWidth ?? 'max']} mx-auto w-full"
+  class="flex flex-col flex-1 pt-6 pb-10 {maxWidthMapping[
+    $page.data?.layout?.maxWidth ?? 'max'
+  ]} mx-auto w-full"
 >
   {#if !$page.error && $page.data?.layout?.showTitle}
     <h1 class="mb-6 text-4xl font-bold">{pageTitle}</h1>

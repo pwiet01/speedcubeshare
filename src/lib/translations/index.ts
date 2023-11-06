@@ -14,6 +14,11 @@ const config: Config<{ s1?: string; s2?: string }> = {
     },
     {
       locale: 'en',
+      key: 'error',
+      loader: async () => (await import('./en/error.json')).default,
+    },
+    {
+      locale: 'en',
       key: 'legalNotice',
       routes: ['/legal-notice'],
       loader: async () => (await import('./en/legalNotice.json')).default,

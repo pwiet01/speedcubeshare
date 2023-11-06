@@ -40,5 +40,6 @@ module.exports = {
     'svelte/no-at-html-tags': 'off',
     'no-console': ['error'],
     '@typescript-eslint/no-explicit-any': 'off',
+    'object-shorthand': ['error', 'always'],
   },
 };

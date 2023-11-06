@@ -36,6 +36,7 @@
   "type": "module",
   "dependencies": {
     "@fontsource/lato": "^5.0.17",
+    "@lucia-auth/adapter-prisma": "^3.0.2",
     "@prisma/client": "^5.5.2",
     "lucia": "^2.7.3",
     "sveltekit-i18n": "^2.4.2"

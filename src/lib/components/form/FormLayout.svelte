@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { enhance } from '$app/forms';
+
   export let title: string | undefined = undefined;
   export let titleSize = 'text-2xl';
   export let titleMargin = 'mb-6';
