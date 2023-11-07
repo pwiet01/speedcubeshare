@@ -2,11 +2,16 @@ import type { Actions } from '@sveltejs/kit';
 import { auth } from '$lib/server/ts/lucia';
 import { fail, redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import { filterFormParseData, parseFormData } from '$lib/server/ts/formUtils/formUtils';
-import { validateEmail } from '$lib/server/ts/formUtils/validate';
+import { parseFormData } from '$lib/server/ts/formUtils/formUtils';
+import {
+  validateEmail,
+  validatePassword,
+  validateUsername,
+} from '$lib/server/ts/formUtils/validate';
 import type { User } from 'lucia';
 import { LuciaError } from 'lucia';
 import type { FormValidationErrors } from '$lib/ts/formUtils/types';
+import { globalConfig } from '$lib/config/globalConfig';
 
 export const load: PageServerLoad = async ({ parent }) => {
   const { session } = await parent();
@@ -21,18 +26,20 @@ export const actions: Actions = {
 };
 
 async function defaultAction(request: Request, locals: App.Locals) {
-  const form = parseFormData(await request.formData(), {
+  const form = await parseFormData(await request.formData(), {
     email: { validate: validateEmail },
-    password: {},
-    username: {},
-    displayName: {},
+    password: {
+      trim: false,
+      minLength: globalConfig.user.passwordMinLength,
+      validate: validatePassword,
+    },
+    username: { maxLength: globalConfig.user.usernameMaxLength, validate: validateUsername },
+    displayName: { maxLength: globalConfig.user.displayNameMaxLength },
   });
-
-  const filteredFormData = filterFormParseData(form.data, new Set(['password']));
 
   if (!form.validationResult.success) {
     return fail(400, {
-      data: filteredFormData,
+      data: form.data,
       errors: form.validationResult.errors,
     });
   }
@@ -61,7 +68,7 @@ async function defaultAction(request: Request, locals: App.Locals) {
       };
 
       return fail(400, {
-        data: filteredFormData,
+        data: form.data,
         errors,
       });
     }

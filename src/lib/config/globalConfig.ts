@@ -18,4 +18,9 @@ export const globalConfig = {
     homepage: 'https://pwietmaier.de',
     projectGitHub: 'https://github.com/pwiet01/speedcubeshare',
   },
+  user: {
+    usernameMaxLength: 15,
+    displayNameMaxLength: 40,
+    passwordMinLength: 8,
+  },
 };

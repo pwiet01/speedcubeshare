@@ -21,9 +21,9 @@ export const actions: Actions = {
 };
 
 async function defaultAction(request: Request, locals: App.Locals) {
-  const form = parseFormData(await request.formData(), {
-    email: { validate: validateEmail },
-    password: {},
+  const form = await parseFormData(await request.formData(), {
+    email: {},
+    password: { trim: false },
   });
 
   const filteredFormData = filterFormParseData(form.data, new Set(['password']));

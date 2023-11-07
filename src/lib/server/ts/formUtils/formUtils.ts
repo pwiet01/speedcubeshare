@@ -13,14 +13,18 @@ const defaultOptions: FormParseFieldOptions = {
   expectedType: 'string',
   minLength: 0,
   maxLength: 255,
+  trim: true,
 };
 
-export function parseFormData(formData: FormData, options: FormParseOptions): FormParseResult {
+export async function parseFormData(
+  formData: FormData,
+  options: FormParseOptions
+): Promise<FormParseResult> {
   let validationResult: FormValidationResult = { success: true };
   const data: FormParseData = {};
 
   for (const [key, fieldOptions] of Object.entries(options)) {
-    const value = formData.get(key);
+    let value = formData.get(key);
     const mergedOptions = { ...defaultOptions, ...fieldOptions };
 
     const typeValidationResult = validateType(
@@ -40,6 +44,10 @@ export function parseFormData(formData: FormData, options: FormParseOptions): Fo
       continue;
     }
 
+    if (mergedOptions.trim) {
+      value = value.trim();
+    }
+
     data[key] = value;
 
     const lengthValidationResult = validateLength(
@@ -55,7 +63,7 @@ export function parseFormData(formData: FormData, options: FormParseOptions): Fo
     }
 
     if (mergedOptions.validate) {
-      const customValidationResult = mergedOptions.validate(key, value);
+      const customValidationResult = await mergedOptions.validate(key, value);
 
       if (!customValidationResult.success) {
         validationResult = mergeValidationResults(validationResult, customValidationResult);

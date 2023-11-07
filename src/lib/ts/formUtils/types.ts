@@ -17,11 +17,12 @@ export type FormValidationResult =
     };
 
 export interface FormParseFieldOptions {
-  validate?: (key: string, value: string) => FormValidationResult;
+  validate?: (key: string, value: string) => Promise<FormValidationResult> | FormValidationResult;
   required: boolean;
   expectedType: 'string' | 'file';
   minLength: number;
   maxLength: number;
+  trim: boolean;
 }
 
 export interface FormParseOptions {

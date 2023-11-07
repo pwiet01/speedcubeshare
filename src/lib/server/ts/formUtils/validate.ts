@@ -1,4 +1,10 @@
 import type { FormValidationResult } from '$lib/ts/formUtils/types';
+import {
+  validateEmailFormat,
+  validatePasswordFormat,
+  validateUsernameFormat,
+} from '$lib/ts/formUtils/validateClient';
+import prisma from '$lib/server/ts/prisma';
 
 export function validateType(
   key: string,
@@ -37,9 +43,45 @@ export function validateLength(
   return success();
 }
 
-export function validateEmail(key: string, value: string): FormValidationResult {
-  if (!/^\S+@\S+$/.test(value)) {
+export async function validateEmail(key: string, value: string): Promise<FormValidationResult> {
+  if (!validateEmailFormat(value)) {
     return fail(key, 'error.formValidation.email');
+  }
+
+  const user = await prisma.user.findUnique({
+    where: {
+      email: value,
+    },
+  });
+
+  if (user) {
+    return fail(key, 'error.formValidation.userAlreadyExists');
+  }
+
+  return success();
+}
+
+export function validatePassword(key: string, value: string): FormValidationResult {
+  if (!validatePasswordFormat(value)) {
+    return fail(key, 'error.formValidation.password');
+  }
+
+  return success();
+}
+
+export async function validateUsername(key: string, value: string): Promise<FormValidationResult> {
+  if (!validateUsernameFormat(value)) {
+    return fail(key, 'error.formValidation.username');
+  }
+
+  const user = await prisma.user.findUnique({
+    where: {
+      username: value,
+    },
+  });
+
+  if (user) {
+    return fail(key, 'error.formValidation.usernameAlreadyTaken');
   }
 
   return success();

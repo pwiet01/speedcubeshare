@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { enhance } from '$app/forms';
+
   export let title: string | undefined = undefined;
   export let titleSize = 'text-2xl';
   export let titleMargin = 'mb-6';
@@ -10,7 +12,7 @@
 </script>
 
 <div class="mx-auto w-full {maxWidth} {wrapperClass}">
-  <form {...$$restProps}>
+  <form use:enhance {...$$restProps}>
     {#if title}
       <h1 class="{titleSize} {titleMargin}">{title}</h1>
     {/if}

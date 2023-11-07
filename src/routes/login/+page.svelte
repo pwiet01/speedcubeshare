@@ -2,7 +2,7 @@
   import { t } from '$lib/translations';
   import FormLayout from '$lib/components/form/FormLayout.svelte';
   import TextInput from '$lib/components/form/TextInput.svelte';
-  import { getTranslatedFormErrors } from '$lib/ts/formUtils/formClientUtils';
+  import { getTranslatedFormErrors, updateFormData } from '$lib/ts/formUtils/formUtilsClient';
 
   export let form;
   $: formErrors = getTranslatedFormErrors(form?.errors);
@@ -24,6 +24,8 @@
   />
 
   <TextInput
+    value={form?.data?.password ?? ''}
+    error={formErrors['password']}
     label={$t('common.auth.password')}
     inputId="password"
     type="password"
