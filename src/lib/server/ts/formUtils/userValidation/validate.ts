@@ -25,6 +25,23 @@ export async function validateEmail(key: string, value: string): Promise<FormVal
   return success();
 }
 
+export async function validateEmailExists(
+  key: string,
+  value: string
+): Promise<FormValidationResult> {
+  const user = await prisma.user.findUnique({
+    where: {
+      email: value,
+    },
+  });
+
+  if (!user) {
+    return fail(key, 'error.formValidation.userDoesNotExist');
+  }
+
+  return success();
+}
+
 export function validatePassword(key: string, value: string): FormValidationResult {
   if (!validatePasswordFormat(value)) {
     return fail(key, 'error.formValidation.password');

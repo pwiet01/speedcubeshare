@@ -21,7 +21,13 @@
     "loginWithExisting": "Login with an existing account",
     "passwordHint": "Min. {{s1}} characters including letters and numbers.",
     "usernameHint": "Use only lowercase letters, numbers and underscores.",
-    "displayNameHint": "This will be your publicly visible name."
+    "displayNameHint": "This will be your publicly visible name.",
+    "forgotPassword": "Forgot Password?",
+    "resetPassword": "Reset Password",
+    "forgotPasswordSuccess": {
+      "title": "Check your email!",
+      "text": "We've sent you an email with instructions on how to reset your password."
+    }
   },
   "user": {
     "displayName": "Display Name",

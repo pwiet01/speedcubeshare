@@ -90,10 +90,10 @@
     maxlength={globalConfig.user.displayNameMaxLength}
   />
 
-  <div class="flex flex-col items-center" slot="actions">
+  <div class="flex flex-col" slot="actions">
     <button class="btn btn-primary w-full" type="submit">
       {$t('common.auth.signUp')}
     </button>
-    <a class="mt-5" href="/login">{$t('common.auth.loginWithExisting')}</a>
+    <a class="mt-5 w-fit px-0" href="/login">{$t('common.auth.loginWithExisting')}</a>
   </div>
 </FormLayout>

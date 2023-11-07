@@ -12,6 +12,7 @@
     "required": "This value is required.",
     "invalidType": "Must be of type {{s1}}.",
     "userAlreadyExists": "A user with this email already exists. Try logging in.",
+    "userDoesNotExist": "This email is not registered",
     "usernameAlreadyTaken": "This username is already taken.",
     "incorrectEmailOrPassword": "Incorrect email or password."
   }
