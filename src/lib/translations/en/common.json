@@ -20,7 +20,7 @@
     "createNew": "Create a new account",
     "loginWithExisting": "Login with an existing account",
     "passwordHint": "Min. {{s1}} characters including letters and numbers.",
-    "usernameHint": "Lowercase letters, numbers and underscores.",
+    "usernameHint": "Use only lowercase letters, numbers and underscores.",
     "displayNameHint": "This will be your publicly visible name."
   },
   "user": {

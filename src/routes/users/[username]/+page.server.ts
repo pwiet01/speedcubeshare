@@ -2,10 +2,10 @@ import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import prisma from '$lib/server/ts/prisma';
 
-export const load: PageServerLoad = async ({ params: { username } }) => {
+export const load: PageServerLoad = async ({ params }) => {
   const user = await prisma.user.findUnique({
     where: {
-      username,
+      username: params.username,
     },
   });
 

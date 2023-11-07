@@ -7,7 +7,7 @@ import {
   validateEmail,
   validatePassword,
   validateUsername,
-} from '$lib/server/ts/formUtils/validate';
+} from '$lib/server/ts/formUtils/userValidation/validate';
 import type { User } from 'lucia';
 import { LuciaError } from 'lucia';
 import type { FormValidationErrors } from '$lib/ts/formUtils/types';

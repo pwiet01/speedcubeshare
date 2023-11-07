@@ -19,7 +19,7 @@ export const globalConfig = {
     projectGitHub: 'https://github.com/pwiet01/speedcubeshare',
   },
   user: {
-    usernameMaxLength: 15,
+    usernameMaxLength: 20,
     displayNameMaxLength: 40,
     passwordMinLength: 8,
   },

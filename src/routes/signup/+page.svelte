@@ -7,9 +7,10 @@
     validateEmailFormat,
     validatePasswordFormat,
     validateUsernameFormat,
-  } from '$lib/ts/formUtils/validateClient';
+  } from '$lib/ts/formUtils/userValidation/validateClient';
   import type { FormParseData } from '$lib/ts/formUtils/types';
   import { globalConfig } from '$lib/config/globalConfig';
+  import UsernameAvailability from './_components/UsernameAvailability.svelte';
 
   export let form;
 
@@ -41,6 +42,7 @@
   <TextInput
     bind:value={email}
     error={formErrors['email']}
+    errorHighlight={email.length > 0 && !emailValid}
     label={$t('common.auth.email')}
     inputId="email"
     type="email"
@@ -51,6 +53,7 @@
   <TextInput
     bind:value={password}
     error={formErrors['password']}
+    errorHighlight={password.length > 0 && !passwordValid}
     label={$t('common.auth.password')}
     info={$t('common.auth.passwordHint', { s1: globalConfig.user.passwordMinLength.toString() })}
     inputId="password"
@@ -62,6 +65,7 @@
   <TextInput
     bind:value={username}
     error={formErrors['username']}
+    errorHighlight={username.length > 0 && !usernameValid}
     label={$t('common.user.username')}
     info={$t('common.auth.usernameHint')}
     inputId="username"
@@ -69,7 +73,11 @@
     required
     wrapperClass="my-8"
     maxlength={globalConfig.user.usernameMaxLength}
-  />
+  >
+    <span slot="afterLabelInfo">
+      <UsernameAvailability {username} {usernameValid} />
+    </span>
+  </TextInput>
 
   <TextInput
     bind:value={displayName}
@@ -83,11 +91,7 @@
   />
 
   <div class="flex flex-col items-center" slot="actions">
-    <button
-      disabled={!emailValid || !passwordValid || !usernameValid || displayName.trim().length === 0}
-      class="btn btn-primary w-full"
-      type="submit"
-    >
+    <button class="btn btn-primary w-full" type="submit">
       {$t('common.auth.signUp')}
     </button>
     <a class="mt-5" href="/login">{$t('common.auth.loginWithExisting')}</a>

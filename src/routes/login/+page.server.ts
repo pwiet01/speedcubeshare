@@ -5,7 +5,6 @@ import type { PageServerLoad } from './$types';
 import { LuciaError } from 'lucia';
 import type { Key } from 'lucia';
 import { filterFormParseData, parseFormData } from '$lib/server/ts/formUtils/formUtils';
-import { validateEmail } from '$lib/server/ts/formUtils/validate';
 import type { FormValidationErrors } from '$lib/ts/formUtils/types';
 
 export const load: PageServerLoad = async ({ parent }) => {
