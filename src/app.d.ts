@@ -1,5 +1,7 @@
 declare global {
   namespace App {
+    type Flash = { type: 'success' | 'error'; message: string };
+
     interface Error {
       message?: string;
     }
@@ -9,6 +11,7 @@ declare global {
     }
 
     interface PageData {
+      flash?: Flash;
       meta?: {
         title?: string;
         disableTitleTranslation?: boolean;
@@ -28,7 +31,8 @@ declare global {
     type DatabaseUserAttributes = {
       email: string;
       username: string;
-      display_name?: string;
+      display_name: string;
+      email_confirmed: boolean;
     };
   }
 }

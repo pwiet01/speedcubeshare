@@ -6,7 +6,7 @@
   import Modal from '$lib/components/Modal.svelte';
 
   export let form;
-  $: formErrors = getTranslatedFormErrors(form?.errors);
+  $: formErrors = getTranslatedFormErrors(form?.errors, $t);
 
   let successModal: HTMLDialogElement;
   $: if (form?.success) successModal.showModal();

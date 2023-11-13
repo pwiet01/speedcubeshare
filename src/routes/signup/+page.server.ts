@@ -12,11 +12,13 @@ import type { User } from 'lucia';
 import { LuciaError } from 'lucia';
 import type { FormValidationErrors } from '$lib/ts/formUtils/types';
 import { globalConfig } from '$lib/config/globalConfig';
+import { sendEmailConfirmMessage } from '$lib/server/ts/user/emailConfirmation';
+import { HOST } from '$env/static/private';
 
 export const load: PageServerLoad = async ({ parent }) => {
-  const { session } = await parent();
+  const { user } = await parent();
 
-  if (session) {
+  if (user) {
     throw redirect(302, '/');
   }
 };
@@ -57,6 +59,7 @@ async function defaultAction(request: Request, locals: App.Locals) {
         email: form.data['email'],
         username: form.data['username'],
         display_name: form.data['displayName'],
+        email_confirmed: false,
       },
     });
   } catch (e) {
@@ -82,5 +85,7 @@ async function defaultAction(request: Request, locals: App.Locals) {
   });
 
   locals.auth.setSession(session);
-  throw redirect(302, '/');
+  await sendEmailConfirmMessage(user, HOST, false);
+
+  throw redirect(303, '/');
 }

@@ -1,9 +1,10 @@
 import { auth } from '$lib/server/ts/lucia';
-import { redirect } from '@sveltejs/kit';
 import type { Actions } from '@sveltejs/kit';
+import { redirect } from 'sveltekit-flash-message/server';
 
 export const actions: Actions = {
-  async default({ locals }) {
+  async default(event) {
+    const { locals } = event;
     const session = await locals.auth.validate();
 
     if (session) {
@@ -11,6 +12,7 @@ export const actions: Actions = {
       locals.auth.setSession(null);
     }
 
-    throw redirect(302, '/login');
+    const flash: App.Flash = { type: 'success', message: 'common.auth.toast.signOut' };
+    throw redirect('/login', flash, event);
   },
 };

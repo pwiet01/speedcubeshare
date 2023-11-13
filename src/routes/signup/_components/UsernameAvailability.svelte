@@ -7,16 +7,16 @@
   export let usernameValid: boolean;
   let usernameAvailable: Promise<boolean | undefined> | undefined = undefined;
 
+  let isMounted = false;
   let currentTimeout: number | undefined = undefined;
-  $: startUsernameTimeout(username, usernameValid);
+  $: if (isMounted) startUsernameTimeout(username, usernameValid);
 
   function startUsernameTimeout(current: string, isValid: boolean) {
-    // cancel old timeout
     clearTimeout(currentTimeout);
     usernameAvailable = undefined;
 
     if (isValid) {
-      currentTimeout = setTimeout(() => checkUsernameAvailability(current.trim()), 1000);
+      currentTimeout = window.setTimeout(() => checkUsernameAvailability(current.trim()), 1000);
     }
   }
 
@@ -24,11 +24,11 @@
     usernameAvailable = fetch(`/api/username-availability/${current}`)
       .then((response) => response.json())
       .then((jsonResponse) => (jsonResponse as FormValidationResult).success)
-      .catch((_) => undefined);
+      .catch(() => undefined);
   }
 
   onMount(() => {
-    // clear timeout before unmounting
+    isMounted = true;
     return () => clearTimeout(currentTimeout);
   });
 </script>
@@ -37,17 +37,13 @@
   {#await usernameAvailable}
     <span class="loading loading-dots loading-xs text-primary" />
   {:then available}
-    {#if available === undefined}
-      <span />
-    {:else if available}
+    {#if available}
       <i class="fa-solid fa-circle-check text-success" />
-    {:else}
+    {:else if available !== undefined}
       <span class="text-error">
         <i class="fa-solid fa-circle-xmark mr-1" />
         {$t('error.formValidation.usernameAlreadyTaken')}
       </span>
     {/if}
   {/await}
-{:else}
-  <span />
 {/if}

@@ -1,14 +1,14 @@
 import { loadTranslations } from '$lib/translations';
 import type { LayoutLoad } from './$types';
-import { user } from '$lib/ts/stores';
+import { user as userStore } from '$lib/ts/stores';
 import { get } from 'svelte/store';
 
 export const load: LayoutLoad = async ({ url, data }) => {
   const { pathname } = url;
-  const { session } = data;
+  const { user } = data;
 
-  if (session?.user !== get(user)) {
-    user.set(session?.user);
+  if (user !== get(userStore)) {
+    userStore.set(user);
   }
 
   // i18n

@@ -1,6 +1,7 @@
 <script lang="ts">
   import '../app.css';
-  import '@fontsource/lato';
+  import '@fontsource/lato/400.css';
+  import '@fontsource/lato/700.css';
   import '$lib/assets/fontawesome/css/all.min.css';
   import Header from './_components/Header.svelte';
   import Footer from './_components/Footer.svelte';
@@ -10,6 +11,8 @@
   import { t } from '$lib/translations';
   import type { Page } from '@sveltejs/kit';
   import { dev } from '$app/environment';
+  import { getFlash } from 'sveltekit-flash-message';
+  import Toast from '$lib/components/Toast.svelte';
 
   $: pageTitle = getPageTitle($page);
 
@@ -25,6 +28,8 @@
     small: 'max-w-[50rem]',
     max: 'max-w-[110rem]',
   };
+
+  const flash = getFlash(page);
 
   onMount(() => {
     setDocHeight();
@@ -60,7 +65,7 @@
   ]} mx-auto w-full"
 >
   {#if !$page.error && $page.data?.layout?.showTitle}
-    <h1 class="mb-6 text-4xl font-bold">{pageTitle}</h1>
+    <h1 class="mb-6 text-4xl">{pageTitle}</h1>
   {/if}
 
   <slot />
@@ -75,3 +80,9 @@
   <meta name="keywords" content={keywords} />
   <meta name="description" content={description} />
 </svelte:head>
+
+{#if $flash}
+  <Toast type="alert-{$flash.type}">
+    {$t($flash.message)}
+  </Toast>
+{/if}

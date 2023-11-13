@@ -1,5 +1,6 @@
 {
   "pageTitle": {
+    "home": "Home",
     "debug": "Debug",
     "aboutUs": "About Us",
     "contact": "Contact",
@@ -27,6 +28,14 @@
     "forgotPasswordSuccess": {
       "title": "Check your email!",
       "text": "We've sent you an email with instructions on how to reset your password."
+    },
+    "toast": {
+      "signOut": "Successfully logged out!"
+    },
+    "confirmEmail": {
+      "tokenInvalid": "Invalid Token!",
+      "tokenExpired": "Token expired!",
+      "success": "Email confirmed!"
     }
   },
   "user": {

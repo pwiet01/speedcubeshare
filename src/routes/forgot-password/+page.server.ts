@@ -5,9 +5,9 @@ import { parseFormData } from '$lib/server/ts/formUtils/formUtils';
 import { validateEmailExists } from '$lib/server/ts/formUtils/userValidation/validate';
 
 export const load: PageServerLoad = async ({ parent }) => {
-  const { session } = await parent();
+  const { user } = await parent();
 
-  if (session) {
+  if (user) {
     throw redirect(302, '/');
   }
 };

@@ -57,7 +57,8 @@
               {/if}
             </label>
             <div
-              class="menu dropdown-content z-40 px-2 py-4 border shadow-lg bg-base-100 rounded-box w-52 mt-4"
+              class="menu dropdown-content z-40 px-2 py-4 border shadow-lg bg-base-100 rounded-box mt-4
+                {$user ? 'w-72' : 'w-52'}"
             >
               <ProfileNavigation />
 
@@ -85,7 +86,11 @@
       </div>
 
       {#if $user}
-        <LogoutButton formClass="w-full self-end" buttonClass="w-full" />
+        <LogoutButton
+          formClass="w-full self-end"
+          buttonClass="w-full"
+          submitCallback={closeDrawer}
+        />
       {:else}
         <a on:click={closeDrawer} href="/login" class="btn btn-primary w-full self-end">
           {$t('common.auth.signIn')}

@@ -1,7 +1,8 @@
 import type { LayoutServerLoad } from './$types';
+import { loadFlash } from 'sveltekit-flash-message/server';
 
-export const load: LayoutServerLoad = ({ locals }) => {
+export const load: LayoutServerLoad = loadFlash(async ({ locals }) => {
   return {
-    session: locals.auth.validate(),
+    user: (await locals.auth.validate())?.user,
   };
-};
+});

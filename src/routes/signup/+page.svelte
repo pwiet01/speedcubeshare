@@ -20,7 +20,7 @@
   let displayName = '';
 
   $: wrapAndUpdateFormData(form?.data);
-  $: formErrors = getTranslatedFormErrors(form?.errors);
+  $: formErrors = getTranslatedFormErrors(form?.errors, $t);
 
   $: emailValid = validateEmailFormat(email);
   $: passwordValid = validatePasswordFormat(password);

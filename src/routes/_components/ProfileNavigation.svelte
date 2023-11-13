@@ -6,18 +6,18 @@
 </script>
 
 {#if $user}
-  <div class="mb-2 px-4 w-full flex gap-4 items-center justify-start">
+  <div class="mb-4 px-4 w-full flex justify-between items-center">
     <img
       src="https://yt3.googleusercontent.com/ytc/APkrFKZ9USK2IB7p9lhmvJPbDBxbJKLVCwRoBVOSF19JGw=s176-c-k-c0x00ffffff-no-rj"
       alt="User"
-      class="rounded-full w-10 h-10"
+      class="rounded-full w-9 h-9"
     />
 
-    <p class="text-lg">pwiet01</p>
+    <p class="font-bold w-4/5 break-words">{$user.display_name}</p>
   </div>
 
   <ul class="menu px-0">
-    <li><a on:click={closeDrawer} href="/users/pwiet01">{$t('common.overview')}</a></li>
+    <li><a on:click={closeDrawer} href="/users/{$user.username}">{$t('common.overview')}</a></li>
     <li><a on:click={closeDrawer} href="/settings">{$t('common.pageTitle.settings')}</a></li>
   </ul>
 {:else}

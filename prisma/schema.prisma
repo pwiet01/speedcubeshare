@@ -8,14 +8,17 @@ datasource db {
 }
 
 model User {
-  id           String   @id @unique
-  email        String   @unique @db.VarChar(255)
-  username     String   @unique @db.VarChar(255)
-  display_name String   @db.VarChar(255)
-  profile      Profile?
+  id              String   @id @unique
+  email           String   @unique
+  email_confirmed Boolean
+  username        String   @unique
+  display_name    String
+  profile         Profile?
 
-  auth_session Session[]
-  key          Key[]
+  auth_session           Session[]
+  key                    Key[]
+  email_confirm_token    EmailConfirmToken?
+  password_restore_token PasswordRestoreToken?
 
   @@map("user")
 }
@@ -48,4 +51,24 @@ model Profile {
 
   @@index([user_id])
   @@map("profile")
+}
+
+model EmailConfirmToken {
+  id      Int      @id @default(autoincrement())
+  user_id String   @unique
+  token   String   @unique
+  expires DateTime @db.Timestamptz
+  user    User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@map("email_confirm_token")
+}
+
+model PasswordRestoreToken {
+  id      Int      @id @default(autoincrement())
+  user_id String   @unique
+  token   String   @unique
+  expires DateTime @db.Timestamptz
+  user    User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@map("password_restore_token")
 }

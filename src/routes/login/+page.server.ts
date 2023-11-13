@@ -8,9 +8,9 @@ import { filterFormParseData, parseFormData } from '$lib/server/ts/formUtils/for
 import type { FormValidationErrors } from '$lib/ts/formUtils/types';
 
 export const load: PageServerLoad = async ({ parent }) => {
-  const { session } = await parent();
+  const { user } = await parent();
 
-  if (session) {
+  if (user) {
     throw redirect(302, '/');
   }
 };
@@ -64,5 +64,5 @@ async function defaultAction(request: Request, locals: App.Locals) {
   });
 
   locals.auth.setSession(session);
-  throw redirect(302, '/');
+  throw redirect(303, '/');
 }

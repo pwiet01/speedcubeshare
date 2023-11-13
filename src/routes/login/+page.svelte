@@ -5,7 +5,7 @@
   import { getTranslatedFormErrors } from '$lib/ts/formUtils/formUtilsClient';
 
   export let form;
-  $: formErrors = getTranslatedFormErrors(form?.errors);
+  $: formErrors = getTranslatedFormErrors(form?.errors, $t);
 </script>
 
 <FormLayout
