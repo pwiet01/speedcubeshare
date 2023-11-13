@@ -9,5 +9,5 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 prisma/migrations
 
-# Mail templates
-src/lib/server/mail/templates/*/build
+# Mail
+src/lib/server/mail/**/build

@@ -7,7 +7,11 @@ export default defineConfig({
     sveltekit(),
     watch({
       pattern: 'src/lib/server/mail/templates/*/*.handlebars',
-      command: 'sh buildMail.sh',
+      command: 'sh buildMail.sh templates',
+    }),
+    watch({
+      pattern: 'src/lib/server/mail/images/*.png',
+      command: 'sh buildMail.sh images',
     }),
   ],
 });

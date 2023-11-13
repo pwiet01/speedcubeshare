@@ -1,12 +1,11 @@
 import nodemailer from 'nodemailer';
-import fs from 'fs';
+import Handlebars from 'handlebars';
 import { dev } from '$app/environment';
 import { MAILER_HOST, MAILER_USER, MAILER_PASSWORD } from '$env/static/private';
 import { serverConfig } from '$lib/server/config/serverConfig';
 import { mailSubjects } from '$lib/server/mail/subjects/en/subjects';
-import Handlebars from 'handlebars';
-import logoPath from '$lib/assets/images/speedcubeshare_logo_full.png';
 import '$lib/server/mail/templates/en/build/templates';
+import logoBase64 from '$lib/server/mail/images/build/logo_full.txt?raw';
 
 export interface CustomMail {
   to: string;
@@ -29,14 +28,7 @@ const transport = nodemailer.createTransport(
   }
 );
 
-let logoBase64: string;
-
 export async function sendMail(mail: CustomMail) {
-  if (!logoBase64) {
-    // FIXME Email base64 logo import broken in production
-    logoBase64 = fs.readFileSync(logoPath.slice(1)).toString('base64');
-  }
-
   return transport.sendMail({
     subject: mailSubjects[mail.template],
     to: mail.to,
