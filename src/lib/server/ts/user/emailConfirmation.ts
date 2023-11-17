@@ -3,8 +3,9 @@ import { generateToken, getDatePlusDays } from '$lib/ts/utils';
 import { sendMail } from '$lib/server/mail/mailer';
 import type { User } from 'lucia';
 import { serverConfig } from '$lib/server/config/serverConfig';
+import { ORIGIN } from '$env/static/private';
 
-export async function sendEmailConfirmMessage(user: User, hostname: string, deleteExisting = true) {
+export async function sendEmailConfirmMessage(user: User, deleteExisting = true) {
   if (deleteExisting) {
     await deleteUserTokens(user.userId);
   }
@@ -22,7 +23,7 @@ export async function sendEmailConfirmMessage(user: User, hostname: string, dele
     to: user.email,
     template: 'confirmEmail',
     props: {
-      confirmUrl: `${hostname}/confirm-email/${token}`,
+      confirmUrl: `${ORIGIN}/confirm-email/${token}`,
     },
   });
 }
@@ -38,7 +39,7 @@ function createToken(userId: string, token: string) {
 }
 
 function deleteUserTokens(userId: string) {
-  return prisma.emailConfirmToken.delete({
+  return prisma.emailConfirmToken.deleteMany({
     where: {
       user_id: userId,
     },

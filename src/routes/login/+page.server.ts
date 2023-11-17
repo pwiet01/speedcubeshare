@@ -16,7 +16,7 @@ export const load: PageServerLoad = async ({ parent }) => {
 };
 
 export const actions: Actions = {
-  default: async ({ request, locals }) => defaultAction(request, locals),
+  default: ({ request, locals }) => defaultAction(request, locals),
 };
 
 async function defaultAction(request: Request, locals: App.Locals) {

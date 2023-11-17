@@ -34,7 +34,7 @@
   />
 
   <div class="flex flex-col" slot="actions">
-    <button class="btn btn-primary w-full" type="submit">{$t('common.auth.signIn')}</button>
+    <button type="submit" class="btn btn-primary w-full">{$t('common.auth.signIn')}</button>
     <a class="mt-5 w-fit px-0" href="/forgot-password">{$t('common.auth.forgotPassword')}</a>
     <a class="mt-3 w-fit px-0" href="/signup">{$t('common.auth.createNew')}</a>
   </div>

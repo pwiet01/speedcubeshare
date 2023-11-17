@@ -30,6 +30,7 @@ export const load: PageServerLoad = async (event) => {
   await updateUserEmailConfirmedStatus(userId);
   await deleteUserTokens(userId);
 
+  // FIXME Email confirm banner does not disappear immediately
   return {
     success: true,
     message: 'common.auth.confirmEmail.success',
@@ -45,7 +46,7 @@ function deleteToken(token: string) {
 }
 
 function deleteUserTokens(userId: string) {
-  return prisma.emailConfirmToken.delete({
+  return prisma.emailConfirmToken.deleteMany({
     where: {
       user_id: userId,
     },

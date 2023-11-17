@@ -13,6 +13,11 @@
   import { dev } from '$app/environment';
   import { getFlash } from 'sveltekit-flash-message';
   import Toast from '$lib/components/Toast.svelte';
+  import { enhance } from '$app/forms';
+  import { user } from '$lib/ts/stores';
+
+  $: mustConfirmEmail = !!$user && !$user.email_confirmed;
+  let allowConfirmMailResend = true;
 
   $: pageTitle = getPageTitle($page);
 
@@ -57,6 +62,40 @@
   }
 </script>
 
+{#if mustConfirmEmail}
+  <div
+    class="bg-error body-full-width-section flex justify-center items-center gap-2 sm:gap-3 text-error-content py-1"
+  >
+    <div class="flex items-center gap-2">
+      <i class="fa-solid fa-circle-exclamation" />
+      <p class="text-sm sm:text-base">{$t('common.auth.confirmEmail.confirmPrompt')}</p>
+    </div>
+    <button
+      type="button"
+      on:click={() => window.location.reload()}
+      class="btn btn-xs sm:btn-sm btn-link text-error-content normal-case !p-0"
+    >
+      {$t('common.auth.confirmEmail.refresh')}
+    </button>
+    <form
+      use:enhance={() => {
+        allowConfirmMailResend = false;
+      }}
+      method="post"
+      action="/confirm-email"
+      class="flex items-center"
+    >
+      <button
+        type="submit"
+        class="btn btn-xs sm:btn-sm btn-link text-error-content normal-case !p-0 !bg-transparent"
+        disabled={!allowConfirmMailResend}
+      >
+        {$t('common.auth.confirmEmail.resend')}
+      </button>
+    </form>
+  </div>
+{/if}
+
 <Header debug={dev} />
 
 <main
@@ -82,7 +121,10 @@
 </svelte:head>
 
 {#if $flash}
-  <Toast type="alert-{$flash.type}">
+  <Toast
+    type="alert-{$flash.type} text-{$flash.type}-content"
+    spacing={mustConfirmEmail ? 'top-24' : 'top-16'}
+  >
     {$t($flash.message)}
   </Toast>
 {/if}

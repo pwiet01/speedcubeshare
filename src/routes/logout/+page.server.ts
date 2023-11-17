@@ -12,7 +12,7 @@ export const actions: Actions = {
       locals.auth.setSession(null);
     }
 
-    const flash: App.Flash = { type: 'success', message: 'common.auth.toast.signOut' };
+    const flash: App.Flash = { type: 'success', message: 'common.auth.signOutSuccess' };
     throw redirect('/login', flash, event);
   },
 };

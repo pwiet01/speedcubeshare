@@ -7,7 +7,8 @@
 <dialog class="modal backdrop-blur" bind:this={modalRef}>
   <div class="modal-box">
     <form method="dialog">
-      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button
+      >
     </form>
     <h1 class="text-2xl">{title}</h1>
 
@@ -18,6 +19,6 @@
     <slot name="actions" />
   </div>
   <form method="dialog" class="modal-backdrop">
-    <button class="cursor-default" />
+    <button type="button" class="cursor-default" />
   </form>
 </dialog>

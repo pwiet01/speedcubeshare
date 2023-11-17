@@ -4,12 +4,16 @@
   import FormLayout from '$lib/components/form/FormLayout.svelte';
   import { getTranslatedFormErrors } from '$lib/ts/formUtils/formUtilsClient';
   import Modal from '$lib/components/Modal.svelte';
+  import { onMount } from 'svelte';
 
   export let form;
   $: formErrors = getTranslatedFormErrors(form?.errors, $t);
 
   let successModal: HTMLDialogElement;
-  $: if (form?.success) successModal.showModal();
+  let isMounted = false;
+  $: if (form?.success && isMounted) successModal.showModal();
+
+  onMount(() => (isMounted = true));
 </script>
 
 <FormLayout
@@ -28,7 +32,7 @@
   />
 
   <div class="flex flex-col" slot="actions">
-    <button class="btn btn-primary w-full" type="submit">{$t('common.auth.resetPassword')}</button>
+    <button type="submit" class="btn btn-primary w-full">{$t('common.auth.resetPassword')}</button>
     <a class="mt-5 w-fit px-0" href="/login">{$t('common.auth.signIn')}</a>
   </div>
 </FormLayout>

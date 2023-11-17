@@ -13,7 +13,7 @@ export const load: PageServerLoad = async ({ parent }) => {
 };
 
 export const actions: Actions = {
-  default: async ({ request }) => defaultAction(request),
+  default: ({ request }) => defaultAction(request),
 };
 
 async function defaultAction(request: Request) {

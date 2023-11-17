@@ -2,7 +2,7 @@ BASE_PATH=$PWD
 
 # Compile handlebars templates
 compile_templates() {
-  echo "Compiling templates..."
+  echo "Compiling mail templates..."
 
   cd $BASE_PATH/src/lib/server/mail/templates
   rm -rf ./*/build
@@ -17,7 +17,7 @@ compile_templates() {
 
 # Transform images to base64
 transform_images() {
-  echo "Transforming images..."
+  echo "Transforming mail images..."
 
   cd $BASE_PATH/src/lib/server/mail/images
   rm -rf ./build

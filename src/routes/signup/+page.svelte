@@ -91,7 +91,7 @@
   />
 
   <div class="flex flex-col" slot="actions">
-    <button class="btn btn-primary w-full" type="submit">
+    <button type="submit" class="btn btn-primary w-full">
       {$t('common.auth.signUp')}
     </button>
     <a class="mt-5 w-fit px-0" href="/login">{$t('common.auth.loginWithExisting')}</a>

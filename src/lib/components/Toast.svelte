@@ -2,7 +2,8 @@
   import { onMount } from 'svelte';
 
   export let timeout: number | undefined = 4000;
-  export let position = 'toast-top toast-end top-16';
+  export let spacing = 'top-16';
+  export let position = 'toast-top toast-end';
   export let type = 'alert-success';
 
   let isMounted = false;
@@ -26,7 +27,7 @@
 </script>
 
 {#if visible}
-  <div class="toast {position}">
+  <div class="toast {position} {spacing}">
     <div class="alert {type}">
       <span>
         <slot />

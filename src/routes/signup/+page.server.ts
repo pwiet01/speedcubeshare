@@ -13,7 +13,6 @@ import { LuciaError } from 'lucia';
 import type { FormValidationErrors } from '$lib/ts/formUtils/types';
 import { globalConfig } from '$lib/config/globalConfig';
 import { sendEmailConfirmMessage } from '$lib/server/ts/user/emailConfirmation';
-import { HOST } from '$env/static/private';
 
 export const load: PageServerLoad = async ({ parent }) => {
   const { user } = await parent();
@@ -24,7 +23,7 @@ export const load: PageServerLoad = async ({ parent }) => {
 };
 
 export const actions: Actions = {
-  default: async ({ request, locals }) => defaultAction(request, locals),
+  default: ({ request, locals }) => defaultAction(request, locals),
 };
 
 async function defaultAction(request: Request, locals: App.Locals) {
@@ -85,7 +84,7 @@ async function defaultAction(request: Request, locals: App.Locals) {
   });
 
   locals.auth.setSession(session);
-  await sendEmailConfirmMessage(user, HOST, false);
+  await sendEmailConfirmMessage(user, false);
 
   throw redirect(303, '/');
 }

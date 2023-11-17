@@ -3,6 +3,8 @@
   "internal": "Internal Error",
   "internalHint": "Something went wrong, please try again later...",
   "notFound": "Not Found",
+  "forbidden": "Forbidden",
+  "methodNotAllowed": "Method Not Allowed",
   "formValidation": {
     "minLength": "Must at least have {{s1}} characters.",
     "maxLength": "Must not have more than {{s1}} characters.",
