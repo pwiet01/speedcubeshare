@@ -18,7 +18,7 @@
 
 <FormLayout
   method="post"
-  title={$t('common.auth.resetPassword')}
+  title={$t('common.auth.forgotPassword')}
   wrapperClass="flex-1 flex flex-col justify-center"
 >
   <TextInput
@@ -32,7 +32,9 @@
   />
 
   <div class="flex flex-col" slot="actions">
-    <button type="submit" class="btn btn-primary w-full">{$t('common.auth.resetPassword')}</button>
+    <button type="submit" class="btn btn-primary w-full"
+      >{$t('common.auth.getPasswordResetLink')}</button
+    >
     <a class="mt-5 w-fit px-0" href="/login">{$t('common.auth.signIn')}</a>
   </div>
 </FormLayout>

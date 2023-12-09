@@ -3,9 +3,7 @@
     "home": "Home",
     "debug": "Debug",
     "aboutUs": "About Us",
-    "contact": "Contact",
     "legalNotice": "Legal Notice",
-    "cookiePolicy": "Cookie Policy",
     "settings": "Settings"
   },
   "footer": {
@@ -15,6 +13,7 @@
   "auth": {
     "email": "Email",
     "password": "Password",
+    "passwordNew": "New Password",
     "signIn": "Sign In",
     "signOut": "Sign Out",
     "signOutSuccess": "Successfully logged out!",
@@ -25,20 +24,20 @@
     "usernameHint": "Use only lowercase letters, numbers and underscores.",
     "displayNameHint": "This will be your publicly visible name.",
     "forgotPassword": "Forgot Password?",
+    "getPasswordResetLink": "Get reset link",
     "resetPassword": "Reset Password",
     "forgotPasswordSuccess": {
       "title": "Check your email!",
       "text": "We've sent you an email with instructions on how to reset your password."
     },
     "confirmEmail": {
-      "tokenInvalid": "Invalid Token!",
-      "tokenExpired": "Token expired!",
       "success": "Email address confirmed!",
       "confirmPrompt": "Confirm your email address",
       "resend": "Resend email",
       "refresh": "Refresh",
       "sent": "Email sent!"
-    }
+    },
+    "resetPasswordSuccess": "Password successfully updated!"
   },
   "user": {
     "displayName": "Display Name",

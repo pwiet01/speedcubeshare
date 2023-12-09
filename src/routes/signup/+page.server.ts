@@ -84,7 +84,7 @@ async function defaultAction(request: Request, locals: App.Locals) {
   });
 
   locals.auth.setSession(session);
-  await sendEmailConfirmMessage(user, false);
+  await sendEmailConfirmMessage(user.userId, user.email, false);
 
   throw redirect(303, '/');
 }

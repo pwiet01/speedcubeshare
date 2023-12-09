@@ -3,6 +3,8 @@ import type { Actions } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { parseFormData } from '$lib/server/ts/formUtils/formUtils';
 import { validateEmailExists } from '$lib/server/ts/formUtils/userValidation/validate';
+import { sendResetPasswordMessage } from '$lib/server/ts/user/passwordReset';
+import prisma from '$lib/server/ts/prisma';
 
 export const load: PageServerLoad = async ({ parent }) => {
   const { user } = await parent();
@@ -26,6 +28,16 @@ async function defaultAction(request: Request) {
       data: form.data,
       errors: form.validationResult.errors,
     });
+  }
+
+  const user = await prisma.user.findUnique({
+    where: {
+      email: form.data['email'],
+    },
+  });
+
+  if (user) {
+    await sendResetPasswordMessage(user.id, user.email);
   }
 
   return {

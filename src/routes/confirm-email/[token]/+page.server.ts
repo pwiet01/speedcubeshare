@@ -1,5 +1,7 @@
 import prisma from '$lib/server/ts/prisma';
+import { updateUserEmailConfirmedStatus } from '$lib/server/ts/user/emailConfirmation';
 import type { PageServerLoad } from './$types';
+import { redirect } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async (event) => {
   const { params } = event;
@@ -10,31 +12,21 @@ export const load: PageServerLoad = async (event) => {
     },
   });
 
-  if (!token) {
-    return {
-      success: false,
-      message: 'common.auth.confirmEmail.tokenInvalid',
-    };
+  const tokenExpired = token && token.expires < new Date();
+
+  if (tokenExpired) {
+    await deleteToken(token.token);
   }
 
-  if (token.expires < new Date()) {
-    await deleteToken(token.token);
-
-    return {
-      success: false,
-      message: 'common.auth.confirmEmail.tokenExpired',
-    };
+  if (!token || tokenExpired) {
+    throw redirect(302, '/');
   }
 
   const userId = token.user_id;
   await updateUserEmailConfirmedStatus(userId);
   await deleteUserTokens(userId);
 
-  // FIXME Email confirm banner does not disappear immediately
-  return {
-    success: true,
-    message: 'common.auth.confirmEmail.success',
-  };
+  throw redirect(302, '/confirm-email/success');
 };
 
 function deleteToken(token: string) {
@@ -49,17 +41,6 @@ function deleteUserTokens(userId: string) {
   return prisma.emailConfirmToken.deleteMany({
     where: {
       user_id: userId,
-    },
-  });
-}
-
-function updateUserEmailConfirmedStatus(userId: string, status = true) {
-  return prisma.user.update({
-    where: {
-      id: userId,
-    },
-    data: {
-      email_confirmed: status,
     },
   });
 }

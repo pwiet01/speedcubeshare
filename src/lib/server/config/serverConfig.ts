@@ -4,5 +4,6 @@ export const serverConfig = {
   },
   tokenExpiration: {
     confirmEmail: 14,
+    resetPassword: 1,
   },
 };

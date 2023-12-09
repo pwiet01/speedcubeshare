@@ -1,18 +1,12 @@
 import prisma from '$lib/server/ts/prisma';
 import { generateToken, getDatePlusDays } from '$lib/ts/utils';
-import { sendMail } from '$lib/server/mail/mailer';
 import { serverConfig } from '$lib/server/config/serverConfig';
+import { sendMail } from '$lib/server/mail/mailer';
 import { ORIGIN } from '$env/static/private';
+import { auth } from '$lib/server/ts/lucia';
 
-export async function sendEmailConfirmMessage(
-  userId: string,
-  email: string,
-  deleteExisting = true
-) {
-  if (deleteExisting) {
-    await deleteUserTokens(userId);
-  }
-
+export async function sendResetPasswordMessage(userId: string, email: string) {
+  await deleteUserTokens(userId);
   let token = generateToken();
 
   // Make sure the token is unique
@@ -24,36 +18,31 @@ export async function sendEmailConfirmMessage(
 
   return sendMail({
     to: email,
-    template: 'confirmEmail',
+    template: 'resetPassword',
     props: {
-      confirmUrl: `${ORIGIN}/confirm-email/${token}`,
+      resetUrl: `${ORIGIN}/reset-password/${token}`,
     },
   });
 }
 
-export function updateUserEmailConfirmedStatus(userId: string, status = true) {
-  return prisma.user.update({
-    where: {
-      id: userId,
-    },
-    data: {
-      email_confirmed: status,
-    },
-  });
+export async function updateUserPassword(userId: string, plainPassword: string) {
+  const user = await auth.getUser(userId);
+  await auth.invalidateAllUserSessions(userId);
+  await auth.updateKeyPassword('email', user.email, plainPassword);
 }
 
 function createToken(userId: string, token: string) {
-  return prisma.emailConfirmToken.create({
+  return prisma.passwordRestoreToken.create({
     data: {
       user_id: userId,
       token,
-      expires: getDatePlusDays(serverConfig.tokenExpiration.confirmEmail),
+      expires: getDatePlusDays(serverConfig.tokenExpiration.resetPassword),
     },
   });
 }
 
 function deleteUserTokens(userId: string) {
-  return prisma.emailConfirmToken.deleteMany({
+  return prisma.passwordRestoreToken.deleteMany({
     where: {
       user_id: userId,
     },
@@ -61,7 +50,7 @@ function deleteUserTokens(userId: string) {
 }
 
 async function tokenIsUnique(token: string) {
-  const existingToken = await prisma.emailConfirmToken.findUnique({
+  const existingToken = await prisma.passwordRestoreToken.findUnique({
     where: {
       token,
     },

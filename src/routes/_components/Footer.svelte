@@ -10,9 +10,7 @@
   <div class="footer footer-center py-10 bg-neutral text-neutral-content">
     <nav class="flex items-center justify-center gap-4 flex-wrap">
       <a href="/about-us">{$t('common.pageTitle.aboutUs')}</a>
-      <a href="/contact">{$t('common.pageTitle.contact')}</a>
       <a href="/legal-notice">{$t('common.pageTitle.legalNotice')}</a>
-      <a href="/cookie-policy">{$t('common.pageTitle.cookiePolicy')}</a>
     </nav>
     <nav>
       <div class="grid grid-flow-col gap-4">

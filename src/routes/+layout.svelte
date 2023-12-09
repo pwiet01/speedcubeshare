@@ -16,7 +16,7 @@
   import { enhance } from '$app/forms';
   import { user } from '$lib/ts/stores';
 
-  $: mustConfirmEmail = !!$user && !$user.email_confirmed;
+  $: mustConfirmEmail = $user && !$user.email_confirmed;
   let allowConfirmMailResend = true;
 
   $: pageTitle = getPageTitle($page);
@@ -85,6 +85,8 @@
       action="/confirm-email"
       class="flex items-center"
     >
+      <input type="hidden" name="redirectPath" value={$page.url.pathname} />
+
       <button
         type="submit"
         class="btn btn-xs sm:btn-sm btn-link text-error-content normal-case !p-0 !bg-transparent"
