@@ -27,6 +27,6 @@ Launched in 2023, this platform is designed to fill the gap in the online space 
 
 3. Visit http://localhost:5173/
 
-4. The following Services will also be launched in the backgorund:
+4. The following services will also be launched in the background:
    - [MailCatcher](https://www.npmjs.com/package/maildev) at http://localhost:1080
    - [Prisma Studio](https://www.prisma.io/studio) at http://localhost:5555
