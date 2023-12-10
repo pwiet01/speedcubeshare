@@ -1,0 +1,27 @@
+<html lang='en'>
+  <head>
+    <style>
+      #logo-container { width: 100%; padding: 1rem; } #content { width: 100%; padding: 1rem;
+      font-family: 'Lato', sans-serif; } #logo { max-height: 70px; }
+    </style>
+
+    <link rel='preconnect' href='https://fonts.googleapis.com' />
+    <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin='' />
+    <link
+      rel='stylesheet'
+      href='https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap'
+    />
+    <meta charset='UTF-8' />
+    <title>{{title}}</title>
+  </head>
+
+  <body>
+    <div id='logo-container'>
+      <img id='logo' alt='Logo' src='data:image/png;base64,{{logo}}' />
+    </div>
+
+    <div id='content'>
+      {{{content}}}
+    </div>
+  </body>
+</html>

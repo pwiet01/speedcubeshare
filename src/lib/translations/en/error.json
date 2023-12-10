@@ -1,0 +1,21 @@
+{
+  "error": "Error",
+  "internal": "Internal Error",
+  "internalHint": "Something went wrong, please try again later...",
+  "notFound": "Not Found",
+  "forbidden": "Forbidden",
+  "methodNotAllowed": "Method Not Allowed",
+  "formValidation": {
+    "minLength": "Must at least have {{s1}} characters.",
+    "maxLength": "Must not have more than {{s1}} characters.",
+    "email": "Not a valid email address.",
+    "password": "Not a valid password.",
+    "username": "Not a valid username.",
+    "required": "This value is required.",
+    "invalidType": "Must be of type {{s1}}.",
+    "userAlreadyExists": "A user with this email already exists. Try logging in.",
+    "userDoesNotExist": "This email is not registered",
+    "usernameAlreadyTaken": "This username is already taken.",
+    "incorrectEmailOrPassword": "Incorrect email or password."
+  }
+}

@@ -1,4 +1,7 @@
 export const globalConfig = {
+  info: {
+    name: 'SpeedCubeShare',
+  },
   meta: {
     defaultTitle: 'SpeedCubeShare',
     defaultKeywords: 'speedcubeshare',
@@ -10,5 +13,14 @@ export const globalConfig = {
     street: 'Luisenstr. 32',
     city: '49074 Osnabrück',
     country: 'Germany',
+  },
+  url: {
+    homepage: 'https://pwietmaier.de',
+    projectGitHub: 'https://github.com/pwiet01/speedcubeshare',
+  },
+  user: {
+    usernameMaxLength: 20,
+    displayNameMaxLength: 40,
+    passwordMinLength: 8,
   },
 };

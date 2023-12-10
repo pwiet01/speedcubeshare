@@ -1,0 +1,46 @@
+{
+  "pageTitle": {
+    "home": "Home",
+    "debug": "Debug",
+    "aboutUs": "About Us",
+    "legalNotice": "Legal Notice",
+    "settings": "Settings"
+  },
+  "footer": {
+    "bottomNote": "© {{s1}} - {{s2}} is developed and maintained by"
+  },
+  "overview": "Overview",
+  "auth": {
+    "email": "Email",
+    "password": "Password",
+    "passwordNew": "New Password",
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "signOutSuccess": "Successfully logged out!",
+    "signUp": "Sign Up",
+    "createNew": "Create a new account",
+    "loginWithExisting": "Login with an existing account",
+    "passwordHint": "Min. {{s1}} characters including letters and numbers.",
+    "usernameHint": "Use only lowercase letters, numbers and underscores.",
+    "displayNameHint": "This will be your publicly visible name.",
+    "forgotPassword": "Forgot Password?",
+    "getPasswordResetLink": "Get reset link",
+    "resetPassword": "Reset Password",
+    "forgotPasswordSuccess": {
+      "title": "Check your email!",
+      "text": "We've sent you an email with instructions on how to reset your password."
+    },
+    "confirmEmail": {
+      "success": "Email address confirmed!",
+      "confirmPrompt": "Confirm your email address",
+      "resend": "Resend email",
+      "refresh": "Refresh",
+      "sent": "Email sent!"
+    },
+    "resetPasswordSuccess": "Password successfully updated!"
+  },
+  "user": {
+    "displayName": "Display Name",
+    "username": "Username"
+  }
+}

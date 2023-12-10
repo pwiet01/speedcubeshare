@@ -1,9 +1,9 @@
-import { NODE_ENV } from '$env/static/private';
-
 export const serverConfig = {
-  isDevEnv: isDevEnv(),
+  mail: {
+    sender: 'no-reply@speedcubeshare.com',
+  },
+  tokenExpiration: {
+    confirmEmail: 14,
+    resetPassword: 1,
+  },
 };
-
-function isDevEnv() {
-  return NODE_ENV === 'development';
-}

@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String   @id @unique
+  email           String   @unique
+  email_confirmed Boolean
+  username        String   @unique
+  display_name    String
+  profile         Profile?
+
+  auth_session           Session[]
+  key                    Key[]
+  email_confirm_token    EmailConfirmToken?
+  password_restore_token PasswordRestoreToken?
+
+  @@map("user")
+}
+
+model Session {
+  id             String @id @unique
+  user_id        String
+  user           User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  active_expires BigInt
+  idle_expires   BigInt
+
+  @@index([user_id])
+  @@map("session")
+}
+
+model Key {
+  id              String  @id @unique
+  user_id         String
+  user            User    @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  hashed_password String?
+
+  @@index([user_id])
+  @@map("key")
+}
+
+model Profile {
+  id      Int    @id @default(autoincrement())
+  user_id String @unique
+  user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@index([user_id])
+  @@map("profile")
+}
+
+model EmailConfirmToken {
+  id      Int      @id @default(autoincrement())
+  user_id String   @unique
+  token   String   @unique
+  expires DateTime @db.Timestamptz
+  user    User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@map("email_confirm_token")
+}
+
+model PasswordRestoreToken {
+  id      Int      @id @default(autoincrement())
+  user_id String   @unique
+  token   String   @unique
+  expires DateTime @db.Timestamptz
+  user    User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@map("password_restore_token")
+}

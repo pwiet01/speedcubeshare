@@ -3,6 +3,11 @@ node_modules
 /build
 /.svelte-kit
 /package
-.env.local
+.env.*
+!.env.development
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+prisma/migrations
+
+# Mail
+src/lib/server/mail/**/build

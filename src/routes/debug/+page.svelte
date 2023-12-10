@@ -2,5 +2,5 @@
   import DebugBreakpoint from './_components/DebugBreakpoint.svelte';
 </script>
 
-<h1 class="text-xl opacity-50">Breakpoint</h1>
+<h2 class="text-xl">Breakpoint</h2>
 <DebugBreakpoint />

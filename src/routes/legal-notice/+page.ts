@@ -1,10 +1,15 @@
 import type { PageLoad } from './$types';
 
+export const prerender = true;
+
 export const load: PageLoad = () => {
   return {
     meta: {
-      title: 'Legal Notice',
-      keywords: 'legal-notice',
+      title: 'common.pageTitle.legalNotice',
+    },
+    layout: {
+      showTitle: true,
+      maxWidth: 'small',
     },
   };
 };
