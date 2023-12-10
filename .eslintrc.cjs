@@ -40,5 +40,14 @@ module.exports = {
     'no-console': ['error'],
     '@typescript-eslint/no-explicit-any': 'off',
     'object-shorthand': ['error', 'always'],
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+        caughtErrorsIgnorePattern: '^_',
+      },
+    ],
   },
 };
