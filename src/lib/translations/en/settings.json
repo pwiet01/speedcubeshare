@@ -1,0 +1,13 @@
+{
+  "accountSection": {
+    "title": "Account"
+  },
+  "dangerSection": {
+    "title": "Danger Zone",
+    "signOutOnAllDevices": "Sign out on all devices",
+    "confirmSignOut": "Are you sure you want to sign out on all devices including this one?",
+    "deleteAccount": "Delete Account"
+  },
+  "save": "Save Settings",
+  "saved": "Settings saved!"
+}

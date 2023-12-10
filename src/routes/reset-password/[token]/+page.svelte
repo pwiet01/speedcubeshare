@@ -22,7 +22,6 @@
 </script>
 
 <FormLayout
-  method="post"
   title={$t('common.auth.resetPassword')}
   wrapperClass="flex-1 flex flex-col justify-center"
 >
@@ -34,6 +33,7 @@
     info={$t('common.auth.passwordHint', { s1: globalConfig.user.passwordMinLength.toString() })}
     inputId="password"
     type="password"
+    autocomplete="new-password"
     required
   />
 

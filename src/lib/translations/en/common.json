@@ -26,10 +26,7 @@
     "forgotPassword": "Forgot Password?",
     "getPasswordResetLink": "Get reset link",
     "resetPassword": "Reset Password",
-    "forgotPasswordSuccess": {
-      "title": "Check your email!",
-      "text": "We've sent you an email with instructions on how to reset your password."
-    },
+    "forgotPasswordSuccess": "Check your email!",
     "confirmEmail": {
       "success": "Email address confirmed!",
       "confirmPrompt": "Confirm your email address",

@@ -8,7 +8,7 @@
   export let maxWidth = 'max-w-[25rem]';
   export let wrapperClass = '';
   export let actionsMargin = 'mt-4';
-  export let inputsGap = 'gap-1';
+  export let bodyWrapperClass = 'flex flex-col gap-1';
 
   function toggleButtonLoadingState(button: HTMLElement | null, loading: boolean) {
     if (!button) {
@@ -35,6 +35,7 @@
 
 <div class="mx-auto w-full {maxWidth} {wrapperClass}">
   <form
+    method="post"
     use:enhance={({ submitter }) => {
       toggleButtonLoadingState(submitter, true);
 
@@ -49,7 +50,7 @@
       <h1 class="{titleSize} {titleMargin}">{title}</h1>
     {/if}
 
-    <div class="flex flex-col {inputsGap}">
+    <div class={bodyWrapperClass}>
       <slot />
     </div>
 

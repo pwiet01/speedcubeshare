@@ -13,7 +13,7 @@
   });
 </script>
 
-<div class="w-full h-full flex flex-col justify-center items-center text-center">
+<div class="w-full flex-1 flex flex-col justify-center items-center text-center">
   <h1 class="text-[8rem] sm:text-[12rem] leading-none opacity-20">{$page.status}</h1>
   <h2 class="max-w-2xl">{$t($page.error?.message ?? 'error.error')}</h2>
 </div>

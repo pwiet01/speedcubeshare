@@ -23,68 +23,66 @@ export const load: PageServerLoad = async ({ parent }) => {
 };
 
 export const actions: Actions = {
-  default: ({ request, locals }) => defaultAction(request, locals),
-};
-
-async function defaultAction(request: Request, locals: App.Locals) {
-  const form = await parseFormData(await request.formData(), {
-    email: { validate: validateEmail },
-    password: {
-      trim: false,
-      minLength: globalConfig.user.passwordMinLength,
-      validate: validatePassword,
-    },
-    username: { maxLength: globalConfig.user.usernameMaxLength, validate: validateUsername },
-    displayName: { maxLength: globalConfig.user.displayNameMaxLength },
-  });
-
-  if (!form.validationResult.success) {
-    return fail(400, {
-      data: form.data,
-      errors: form.validationResult.errors,
-    });
-  }
-
-  let user: User;
-
-  try {
-    user = await auth.createUser({
-      key: {
-        providerId: 'email',
-        providerUserId: form.data['email'],
-        password: form.data['password'],
+  async default({ request, locals }) {
+    const form = await parseFormData(await request.formData(), {
+      email: { validate: validateEmail },
+      password: {
+        trim: false,
+        minLength: globalConfig.user.passwordMinLength,
+        validate: validatePassword,
       },
-      attributes: {
-        email: form.data['email'],
-        username: form.data['username'],
-        display_name: form.data['displayName'],
-        email_confirmed: false,
-      },
+      username: { maxLength: globalConfig.user.usernameMaxLength, validate: validateUsername },
+      displayName: { maxLength: globalConfig.user.displayNameMaxLength },
     });
-  } catch (e) {
-    if (e instanceof LuciaError && e.message === 'AUTH_DUPLICATE_KEY_ID') {
-      const errors: FormValidationErrors = {
-        email: {
-          key: 'error.formValidation.userAlreadyExists',
-        },
-      };
 
+    if (!form.validationResult.success) {
       return fail(400, {
         data: form.data,
-        errors,
+        errors: form.validationResult.errors,
       });
     }
 
-    throw e;
-  }
+    let user: User;
 
-  const session = await auth.createSession({
-    userId: user.userId,
-    attributes: {},
-  });
+    try {
+      user = await auth.createUser({
+        key: {
+          providerId: 'email',
+          providerUserId: form.data['email'],
+          password: form.data['password'],
+        },
+        attributes: {
+          email: form.data['email'],
+          username: form.data['username'],
+          display_name: form.data['displayName'],
+          email_confirmed: false,
+        },
+      });
+    } catch (e) {
+      if (e instanceof LuciaError && e.message === 'AUTH_DUPLICATE_KEY_ID') {
+        const errors: FormValidationErrors = {
+          email: {
+            key: 'error.formValidation.userAlreadyExists',
+          },
+        };
 
-  locals.auth.setSession(session);
-  await sendEmailConfirmMessage(user.userId, user.email, false);
+        return fail(400, {
+          data: form.data,
+          errors,
+        });
+      }
 
-  throw redirect(303, '/');
-}
+      throw e;
+    }
+
+    const session = await auth.createSession({
+      userId: user.userId,
+      attributes: {},
+    });
+
+    locals.auth.setSession(session);
+    await sendEmailConfirmMessage(user.userId, user.email, false);
+
+    throw redirect(303, '/');
+  },
+};

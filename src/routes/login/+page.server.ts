@@ -16,53 +16,51 @@ export const load: PageServerLoad = async ({ parent }) => {
 };
 
 export const actions: Actions = {
-  default: ({ request, locals }) => defaultAction(request, locals),
-};
-
-async function defaultAction(request: Request, locals: App.Locals) {
-  const form = await parseFormData(await request.formData(), {
-    email: {},
-    password: { trim: false },
-  });
-
-  const filteredFormData = filterFormParseData(form.data, new Set(['password']));
-
-  if (!form.validationResult.success) {
-    return fail(400, {
-      data: filteredFormData,
-      errors: form.validationResult.errors,
+  async default({ request, locals }) {
+    const form = await parseFormData(await request.formData(), {
+      email: {},
+      password: { trim: false },
     });
-  }
 
-  let user: Key;
+    const filteredFormData = filterFormParseData(form.data, new Set(['password']));
 
-  try {
-    user = await auth.useKey('email', form.data['email'], form.data['password']);
-  } catch (e) {
-    if (
-      e instanceof LuciaError &&
-      (e.message === 'AUTH_INVALID_KEY_ID' || e.message === 'AUTH_INVALID_PASSWORD')
-    ) {
-      const errors: FormValidationErrors = {
-        email: {
-          key: 'error.formValidation.incorrectEmailOrPassword',
-        },
-      };
-
+    if (!form.validationResult.success) {
       return fail(400, {
         data: filteredFormData,
-        errors,
+        errors: form.validationResult.errors,
       });
     }
 
-    throw e;
-  }
+    let user: Key;
 
-  const session = await auth.createSession({
-    userId: user.userId,
-    attributes: {},
-  });
+    try {
+      user = await auth.useKey('email', form.data['email'], form.data['password']);
+    } catch (e) {
+      if (
+        e instanceof LuciaError &&
+        (e.message === 'AUTH_INVALID_KEY_ID' || e.message === 'AUTH_INVALID_PASSWORD')
+      ) {
+        const errors: FormValidationErrors = {
+          email: {
+            key: 'error.formValidation.incorrectEmailOrPassword',
+          },
+        };
 
-  locals.auth.setSession(session);
-  throw redirect(303, '/');
-}
+        return fail(400, {
+          data: filteredFormData,
+          errors,
+        });
+      }
+
+      throw e;
+    }
+
+    const session = await auth.createSession({
+      userId: user.userId,
+      attributes: {},
+    });
+
+    locals.auth.setSession(session);
+    throw redirect(303, '/');
+  },
+};

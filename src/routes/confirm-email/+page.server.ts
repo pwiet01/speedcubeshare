@@ -2,18 +2,19 @@ import { sendEmailConfirmMessage } from '$lib/server/ts/user/emailConfirmation';
 import { error, type Actions } from '@sveltejs/kit';
 import { redirect } from 'sveltekit-flash-message/server';
 import type { PageServerLoad } from './$types';
+import { getCurrentUserOrRedirectToLogin } from '$lib/server/ts/user/authorization';
 
 export const load: PageServerLoad = () => {
-  throw error(405, 'error.methodNotAllowed');
+  throw error(404, 'error.notFound');
 };
 
 export const actions: Actions = {
   async default(event) {
     const { locals, request } = event;
 
-    const user = (await locals.auth.validate())?.user;
+    const user = await getCurrentUserOrRedirectToLogin(locals.auth);
 
-    if (!user || user.email_confirmed) {
+    if (user.email_confirmed) {
       throw error(403, 'error.forbidden');
     }
 
