@@ -7,6 +7,7 @@ export const load: PageLoad = () => {
     },
     layout: {
       showTitle: true,
+      maxWidth: 'small',
     },
   };
 };

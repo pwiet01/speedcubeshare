@@ -1,0 +1,38 @@
+{
+  "topText": "Hey there! I'm Patrice, a Software Engineer and speedcuber who's been twisting and turning cubes for quite some time. Speedcubing has been my go-to hobby, and after noticing a gap in the online space for speedcubing enthusiasts like me, I decided to do something about it. That's how SpeedCubeShare came to life in 2023 – my biggest side project that's grown beyond my expectations.",
+  "section1": {
+    "title": "What We Do",
+    "text": "At SpeedCubeShare, we're not reinventing the cube – we're just making it easier for you to connect with fellow speedcubers. It's a space where you can share your wins, discuss your favorite cubes, swap algorithms, and simply be part of a community that gets your obsession with cubing."
+  },
+  "section2": {
+    "title": "What Makes Us Different",
+    "list": {
+      "item1": {
+        "title": "Profile, Your Way",
+        "text": "Customize your profile to reflect your speedcubing journey – share your best times, favorite cubes, and anything else that makes your cubing experience unique."
+      },
+      "item2": {
+        "title": "Algorithms Made Easy",
+        "text": "No need to search endlessly for algorithms. Our library is here to help you brush up on your skills and maybe even discover a few new tricks. Feel free to contribute your own!"
+      },
+      "item3": {
+        "title": "Stats & Goals",
+        "text": "Keep track of your progress, set goals, and revel in your accomplishments. We're all about celebrating those personal bests."
+      },
+      "item4": {
+        "title": "Cube Talk",
+        "text": "Wondering which cube to try next? Dive into cube reviews and recommendations from the community to make an informed choice."
+      },
+      "item5": {
+        "title": "Chill Forums",
+        "text": "Join in on the laid-back discussions, ask questions, or just lurk – it's all good. Connect with speedcubers who get your love for the cube."
+      }
+    }
+  },
+  "section3": {
+    "title": "Join Us",
+    "text": "Whether you're a speedcubing veteran or just starting out, SpeedCubeShare is here for you. Let's keep it casual, fun, and focused on what we love – solving cubes."
+  },
+  "keepCubing": "Keep Cubing!",
+  "founder": "Founder, SpeedCubeShare"
+}

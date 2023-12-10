@@ -23,6 +23,12 @@ const config: Config<{ s1?: string; s2?: string }> = {
       routes: ['/legal-notice'],
       loader: async () => (await import('./en/legalNotice.json')).default,
     },
+    {
+      locale: 'en',
+      key: 'aboutUs',
+      routes: ['/about-us'],
+      loader: async () => (await import('./en/aboutUs.json')).default,
+    },
   ],
 };
 
