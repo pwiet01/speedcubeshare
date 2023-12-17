@@ -15,7 +15,7 @@ export const load: PageServerLoad = async ({ params }) => {
 
 export const actions: Actions = {
   async default(event) {
-    const { request, params } = event;
+    const { request, params, locals } = event;
     const token = await checkToken(params.token);
 
     const form = await parseFormData(await request.formData(), {
@@ -35,6 +35,8 @@ export const actions: Actions = {
 
     const userId = token.user_id;
     await updateUserPassword(userId, form.data['password']);
+    locals.auth.setSession(null);
+
     await updateUserEmailConfirmedStatus(userId);
     await deleteUserTokens(userId);
 

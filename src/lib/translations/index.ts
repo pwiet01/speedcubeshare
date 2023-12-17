@@ -29,6 +29,12 @@ const config: Config<{ s1?: string; s2?: string }> = {
       routes: ['/about-us'],
       loader: async () => (await import('./en/aboutUs.json')).default,
     },
+    {
+      locale: 'en',
+      key: 'settings',
+      routes: ['/settings'],
+      loader: async () => (await import('./en/settings.json')).default,
+    },
   ],
 };
 

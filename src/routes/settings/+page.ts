@@ -1,6 +1,6 @@
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = () => {
+export const load: PageLoad = ({ data }) => {
   return {
     meta: {
       title: 'common.pageTitle.settings',
@@ -9,5 +9,6 @@ export const load: PageLoad = () => {
       showTitle: true,
       maxWidth: 'small',
     },
+    ...data,
   };
 };
