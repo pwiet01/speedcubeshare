@@ -1,5 +1,4 @@
 <script lang="ts">
-  import SettingsSection from './SettingsSection.svelte';
   import { t } from '$lib/translations';
   import { enhance } from '$app/forms';
 
