@@ -6,18 +6,17 @@ Join us at [SpeedCubeShare](https://speedcubeshare.com) and let's break records 
 
 ## What is SpeedCubeShare?
 
-Launched in 2023, this platform is designed to fill the gap in the online space for speedcubers seeking a community-driven platform to share successes, discuss cube choices, and connect with like-minded individuals.
+SpeedCubeShare is designed to fill the gap in the online space for speedcubers seeking a community-driven platform to share successes, discuss cube choices, and connect with like-minded individuals.
 
 ## Features:
 
 - **Customizable Profiles:** Personalize your profile to showcase your speedcubing achievements, favorite cubes, and personal bests.
+
 - **Algorithm Library:** Access a comprehensive library of algorithms to enhance your skills. Contribute your own algorithms to the community.
 
 - **Stats and Achievements:** Track your progress, set goals, and celebrate milestones with our statistics and achievements tracking system.
 
 - **Cube Reviews and Recommendations:** Explore and discuss the latest speedcubing hardware with reviews and recommendations from the community.
-
-- **Interactive Forums:** Engage in discussions, seek advice, and connect with fellow speedcubers in our forums.
 
 ## Setup for Local Development:
 
