@@ -2,7 +2,7 @@
 
 Welcome to **SpeedCubeShare** – the online hub for speedcubing enthusiasts to connect, share, and celebrate their cubing journey!
 
-Join us at [SpeedCubeShare](https://speedcubeshare.com) and let's break records together!
+Join us at [SpeedCubeShare](https://speedcubeshare.vercel.app) and let's break records together!
 
 ## What is SpeedCubeShare?
 
